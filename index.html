@@ -16,6 +16,12 @@
             <img src="marca-sua-empresa-1024x1024-1.png" alt="Logo da Empresa" class="avatar">
             <h1>Nome da Empresa</h1>
             <p>Soluções práticas e atendimento rápido para você.</p>
+            
+            <!-- TAG DE STATUS DE HORÁRIO -->
+            <div class="pill" id="status">
+                <span class="dot"></span>
+                <span id="stxt">Carregando...</span>
+            </div>
         </div>
 
         <!-- Lista de Links / Botões -->
@@ -24,7 +30,7 @@
                 <i class="fa-brands fa-whatsapp"></i> Falar pelo WhatsApp
             </a>
 
-            <a href="https://seusite.com/cardapio" target="_blank" class="btn">
+            <a href="cardapio.html" target="_blank" class="btn">
                 <i class="fa-solid fa-utensils"></i> Ver Cardápio / Catálogo
             </a>
 
@@ -35,13 +41,70 @@
             <a href="https://maps.google.com" target="_blank" class="btn location">
                 <i class="fa-solid fa-location-dot"></i> Nossa Localização
             </a>
+
+            <a href="faq.html" class="btn">
+                <i class="fa-solid fa-circle-question"></i> Dúvidas Frequentes / FAQ
+            </a>
         </div>
 
-        <!-- Rodapé -->
+        <!-- BLOCO DE AVALIAÇÃO + PAGAMENTO (LOGO ABAIXO DO ÚLTIMO BOTÃO) -->
+        <div class="extra-info">
+            <div class="google-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-score">4,9</span>
+                <span class="rating-count">· 120 avaliações no Google</span>
+            </div>
+
+            <div class="payment-pills">
+                <span class="pay-pill"><i class="fa-brands fa-pix"></i> Pix</span>
+                <span class="pay-pill"><i class="fa-solid fa-credit-card"></i> Cartão</span>
+                <span class="pay-pill"><i class="fa-solid fa-money-bill-wave"></i> Dinheiro</span>
+            </div>
+        </div>
+
+        <!-- Rodapé unificado dentro do container -->
         <footer class="footer">
             <p>Desenvolvido com tecnologia própria.</p>
         </footer>
+
+    </div> <!-- Fim da div container -->
+
+    <!-- BOTÃO FIXO NO RODAPÉ -->
+    <div class="fixed-bar">
+        <a href="https://wa.me/5521999999999?text=Olá!%20Vim%20pelo%20Instagram%20e%20gostaria%20de%20mais%20informações." target="_blank" class="btn whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> Falar pelo WhatsApp
+        </a>
     </div>
+
+    <!-- SCRIPT DE HORÁRIO -->
+    <script>
+        var HOURS = {
+            1: [9, 18], // Segunda
+            2: [9, 18], // Terça
+            3: [9, 18], // Quarta
+            4: [9, 18], // Quinta
+            5: [9, 18], // Sexta
+            6: [9, 20]  // Sábado
+        };
+
+        function checkStatus() {
+            var n = new Date();
+            var dayHours = HOURS[n.getDay()];
+            var currentHour = n.getHours() + n.getMinutes() / 60;
+            var el = document.getElementById('status');
+            var txt = document.getElementById('stxt');
+
+            if (dayHours && currentHour >= dayHours[0] && currentHour < dayHours[1]) {
+                el.className = 'pill on';
+                txt.textContent = 'Aberto agora · Até ' + dayHours[1] + 'h';
+            } else {
+                el.className = 'pill';
+                txt.textContent = 'Fora do horário · Respondo em breve';
+            }
+        }
+
+        checkStatus();
+    </script>
 
 </body>
 </html>

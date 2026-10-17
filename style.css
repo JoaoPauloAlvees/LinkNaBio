@@ -6,10 +6,12 @@
 }
 
 body {
-    background-color: #0f172a; /* Fundo escuro moderno */
-    color: #f8fafc;
+    background-color: #0f172a;
+    background-image: radial-gradient(at 10% 20%, #1d3557 0px, transparent 50%),
+                      radial-gradient(at 90% 80%, #112240 0px, transparent 50%);
+    color: #fcf8f9;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
@@ -19,11 +21,12 @@ body {
     width: 100%;
     max-width: 480px;
     text-align: center;
+    padding-bottom: 90px; /* Garante que o rodapé não fique escondido atrás do botão fixo */
 }
 
 .profile .avatar {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 3px solid #38bdf8;
     object-fit: cover;
@@ -38,7 +41,7 @@ body {
 .profile p {
     font-size: 0.95rem;
     color: #94a3b8;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .links-list {
@@ -83,4 +86,183 @@ body {
     margin-top: 40px;
     font-size: 0.8rem;
     color: #64748b;
+}
+
+/* --- BOTÃO FIXO NO RODAPÉ --- */
+.fixed-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5% 20px;
+    background-color: transparent; /* Remove o fundo da barra, deixando transparente */
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.fixed-bar .btn {
+    width: 100%;
+    max-width: 480px; /* Mantém exatamente o mesmo tamanho dos outros botões */
+}
+
+/* --- ESTILO DA TAG DE HORÁRIO DE FUNCIONAMENTO --- */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    padding: 6px 14px;
+    border-radius: 99px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    font-size: 14px;
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+.pill .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #64748b; /* Cor cinza (fora do horário) */
+}
+
+/* Quando estiver aberto (no horário) */
+.pill.on {
+    color: #f8fafc;
+}
+
+.pill.on .dot {
+    background-color: #12805c; /* Cor verde para aberto */
+    box-shadow: 0 0 0 4px rgba(18, 128, 92, 0.25);
+
+
+}
+/* --- ESTILOS DO FAQ INTERATIVO (SANFONA) --- */
+.faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.faq-item {
+    background-color: #f1f5f9;
+    border: 2px solid #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #0f172a;
+    cursor: pointer;
+    text-align: left;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer p {
+    font-size: 0.88rem;
+    color: #334155;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* Quando a pergunta estiver aberta */
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding-bottom: 4px;
+}
+
+
+/* --- ESTILOS DE AVALIAÇÕES E FORMAS DE PAGAMENTO NO INDEX --- */
+.extra-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin: 25px 0 20px 0;
+    width: 100%;
+}
+
+.google-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.google-rating .stars {
+    color: #fbbf24; /* Amarelo ouro para as estrelas */
+    letter-spacing: 1px;
+}
+
+.google-rating .rating-score {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.payment-pills {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pay-pill {
+    background-color: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+/* --- ESTILOS DA PÁGINA DE CARDÁPIO / CATÁLOGO --- */
+.catalog-card {
+    background-color: #f1f5f9; /* Branco-gelo sofisticado */
+    border: 2px solid #ffffff;  /* Moldura branca límpida */
+    border-radius: 20px;       /* Bordas bem arredondadas */
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.catalog-image {
+    width: 100%;
+    max-height: 550px;         /* Limita a altura em telas grandes para não esticar demais */
+    object-fit: contain;       /* Garante que a imagem inteira apareça sem cortes, seja no celular ou PC */
+    border-radius: 12px;
+}
+
+.catalog-hint {
+    font-size: 0.85rem;
+    color: #475569;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }

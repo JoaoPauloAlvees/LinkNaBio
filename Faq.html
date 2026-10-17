@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome da Empresa | Dúvidas Frequentes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+  
+        <div class="profile">
+            <h1><i class="fa-solid fa-circle-question"></i> Dúvidas frequentes</h1>
+            <p>Tire suas dúvidas antes de chamar.</p>
+        </div>
+
+        <!-- LISTA DE PERGUNTAS SANFONA (ACCORDION) -->
+        <div class="faq-accordion">
+
+            <div class="faq-item active">
+                <button class="faq-question">
+                    <span>Qual é o horário de atendimento?</span>
+                    <i class="fa-solid fa-minus icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Segunda a sexta: 9h às 18h · Sábado: 9h às 20h · Domingo: fechado.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Quais são as formas de pagamento?</span>
+                    <i class="fa-solid fa-plus icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Aceitamos Pix, cartão de crédito/débito e dinheiro no momento da entrega ou retirada.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Como funciona a entrega ou o atendimento?</span>
+                    <i class="fa-solid fa-plus icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Atendemos presencialmente na nossa loja física e também realizamos entregas via motoboy na região.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Qual o prazo de resposta no WhatsApp?</span>
+                    <i class="fa-solid fa-plus icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Atendemos rapidamente durante nosso horário de funcionamento por ordem de chegada de mensagens.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTÃO DE VOLTAR -->
+        <div class="back-area">
+            <a href="index.html" class="btn">
+                <i class="fa-solid fa-arrow-left"></i> Voltar ao início
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p>Página criada por <a href="#" style="color: inherit;">Seu Nome</a></p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT PARA ABRIR E FECHAR AS PERGUNTAS -->
+    <script>
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const icon = question.querySelector('.icon');
+                
+                // Alterna classe 'active' no item clicado
+                item.classList.toggle('active');
+
+                // Alterna ícone entre + e -
+                if (item.classList.contains('active')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
