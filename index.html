@@ -42,7 +42,7 @@
                 <i class="fa-solid fa-location-dot"></i> Nossa Localização
             </a>
 
-            <a href="duvidas.html" class="btn">
+            <a href="duvidas.html"class="btn">
                 <i class="fa-solid fa-circle-question"></i> Dúvidas Frequentes / FAQ
             </a>
         </div>
@@ -78,33 +78,89 @@
 
     <!-- SCRIPT DE HORÁRIO -->
     <script>
-        var HOURS = {
-            1: [9, 18], // Segunda
-            2: [9, 18], // Terça
-            3: [9, 18], // Quarta
-            4: [9, 18], // Quinta
-            5: [9, 18], // Sexta
-            6: [9, 20]  // Sábado
-        };
+    // Tabela de Horários de Funcionamento
+    // 0 = Domingo, 1 = Segunda, 2 = Terça, 3 = Quarta, 4 = Quinta, 5 = Sexta, 6 = Sábado
+    var HOURS = {
+        0: null,     // Domingo (Fechado)
+        1: [9, 18],  // Segunda: 09:00 às 18:00
+        2: [9, 18],  // Terça:   09:00 às 18:00
+        3: [9, 18],  // Quarta:  09:00 às 18:00
+        4: [9, 18],  // Quinta:  09:00 às 18:00
+        5: [9, 18],  // Sexta:   09:00 às 18:00
+        6: [9, 20]   // Sábado:  09:00 às 20:00
+    };
 
-        function checkStatus() {
-            var n = new Date();
-            var dayHours = HOURS[n.getDay()];
-            var currentHour = n.getHours() + n.getMinutes() / 60;
-            var el = document.getElementById('status');
-            var txt = document.getElementById('stxt');
+    var DAY_NAMES = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
 
-            if (dayHours && currentHour >= dayHours[0] && currentHour < dayHours[1]) {
-                el.className = 'pill on';
-                txt.textContent = 'Aberto agora · Até ' + dayHours[1] + 'h';
-            } else {
-                el.className = 'pill';
-                txt.textContent = 'Fora do horário · Respondo em breve';
-            }
+    function checkStatus() {
+        var now = new Date();
+        var currentDay = now.getDay();
+        var currentHour = now.getHours() + now.getMinutes() / 60;
+        
+        var el = document.getElementById('status');
+        var txt = document.getElementById('stxt');
+
+        // Saudação por horário
+        var hourOfDay = now.getHours();
+        var saudacao = "Bom dia!";
+        if (hourOfDay >= 12 && hourOfDay < 18) {
+            saudacao = "Boa tarde!";
+        } else if (hourOfDay >= 18) {
+            saudacao = "Boa noite!";
         }
 
-        checkStatus();
-    </script>
+        var todayHours = HOURS[currentDay];
+
+        // 1. VERIFICA SE ESTÁ ABERTO AGORA
+        if (todayHours && currentHour >= todayHours[0] && currentHour < todayHours[1]) {
+            el.className = 'pill on';
+            txt.textContent = `${saudacao} Aberto agora · Até ${todayHours[1]}h`;
+            return;
+        }
+
+        // 2. SE ESTÁ FECHADO: DESCOBRIR O PRÓXIMO HORÁRIO DE ABERTURA
+        el.className = 'pill'; // Remove a classe 'on' (bolinha fica cinza)
+
+        // Caso vá abrir ainda HOJE
+        if (todayHours && currentHour < todayHours[0]) {
+            txt.textContent = `Estamos fechados · Abriremos hoje às ${todayHours[0]}h`;
+            return;
+        }
+
+        // Procura o próximo dia em que estará aberto
+        var nextDay = (currentDay + 1) % 7;
+        var daysAhead = 1;
+
+        while (!HOURS[nextDay] && daysAhead <= 7) {
+            nextDay = (nextDay + 1) % 7;
+            daysAhead++;
+        }
+
+        var nextHours = HOURS[nextDay];
+        if (daysAhead === 1) {
+            txt.textContent = `Estamos fechados · Abriremos amanhã às ${nextHours[0]}h`;
+        } else {
+            txt.textContent = `Estamos fechados · Abriremos ${DAY_NAMES[nextDay]} às ${nextHours[0]}h`;
+        }
+    }
+
+    checkStatus();
+
+    // Transição suave entre páginas internas (para navegadores compatíveis)
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && !href.startsWith('http') && !href.startsWith('//') && this.target !== '_blank') {
+                if (document.startViewTransition) {
+                    e.preventDefault();
+                    document.startViewTransition(() => {
+                        window.location.href = href;
+                    });
+                }
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
