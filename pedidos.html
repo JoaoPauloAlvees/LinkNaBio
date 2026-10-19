@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Solicitar Pedido | Sua Empresa</title>
+
+    <!-- Usa o CSS original do projeto -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Ícones -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Estilos específicos desta página */
+        .order-page {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .order-back {
+            margin-bottom: 20px;
+        }
+
+        .order-back a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .order-section {
+            background: #f1f5f9;
+            color: #0f172a;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 18px;
+            text-align: left;
+            border: 2px solid #ffffff;
+        }
+
+        .order-section h2 {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        .order-section h2 i {
+            color: #0284c7;
+            margin-right: 7px;
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        .product-check {
+            width: 20px;
+            height: 20px;
+            accent-color: #0284c7;
+            flex-shrink: 0;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-name {
+            display: block;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            display: block;
+            color: #475569;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .product-quantity {
+            width: 58px;
+            padding: 8px 4px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+            color: #0f172a;
+        }
+
+        .order-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 14px 0 7px;
+        }
+
+        .order-input,
+        .order-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: white;
+            color: #0f172a;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .order-input:focus,
+        .order-textarea:focus {
+            border-color: #0284c7;
+        }
+
+        .order-textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 0;
+            cursor: pointer;
+        }
+
+        .delivery-option input {
+            accent-color: #0284c7;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding-top: 14px;
+            margin-top: 10px;
+            border-top: 2px solid #cbd5e1;
+        }
+
+        .order-note {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .order-submit {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        .order-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .order-footer {
+            margin-top: 25px;
+            padding-bottom: 20px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container order-page">
+
+    <!-- Cabeçalho -->
+    <div class="profile">
+        <div style="
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 2px solid #38bdf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 30px;
+            color: #38bdf8;
+        ">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+
+        <h1>Solicitar Pedido</h1>
+        <p>Escolha seus produtos e envie seu pedido pelo WhatsApp.</p>
+    </div>
+
+    <!-- Produtos -->
+    <section class="order-section">
+        <h2><i class="fa-solid fa-utensils"></i> 1. Escolha seus produtos</h2>
+
+        <div class="product">
+            <input class="product-check"
+                   type="checkbox"
+                   id="xtudo"
+                   data-name="X-Tudo"
+                   data-price="25">
+
+            <label class="product-info" for="xtudo">
+                <span class="product-name">X-Tudo</span>
+                <span class="product-price">R$ 25,00</span>
+            </label>
+
+            <input class="product-quantity"
+                   type="number"
+                   min="1"
+                   max="99"
+                   value="1"
+                   aria-label="Quantidade de X-Tudo"
+                   disabled>
+        </div>
+
+        <div class="product">
+            <input class="product-check"
+                   type="checkbox"
+                   id="batata"
+                   data-name="Batata frita"
+                   data-price="12">
+
+            <label class="product-info" for="batata">
+                <span class="product-name">Batata frita</span>
+                <span class="product-price">R$ 12,00</span>
+            </label>
+
+            <input class="product-quantity"
+                   type="number"
+                   min="1"
+                   max="99"
+                   value="1"
+                   aria-label="Quantidade de batatas"
+                   disabled>
+        </div>
+
+        <div class="product">
+            <input class="product-check"
+                   type="checkbox"
+                   id="refri"
+                   data-name="Refrigerante"
+                   data-price="7">
+
+            <label class="product-info" for="refri">
+                <span class="product-name">Refrigerante</span>
+                <span class="product-price">R$ 7,00</span>
+            </label>
+
+            <input class="product-quantity"
+                   type="number"
+                   min="1"
+                   max="99"
+                   value="1"
+                   aria-label="Quantidade de refrigerantes"
+                   disabled>
+        </div>
+
+        <div class="order-total">
+            <span>Total dos produtos</span>
+            <span id="total">R$ 0,00</span>
+        </div>
+
+        <p class="order-note">
+            O valor é uma estimativa dos produtos selecionados.
+            A entrega, se houver, poderá ser cobrada à parte.
+        </p>
+    </section>
+
+    <!-- Entrega ou retirada -->
+    <section class="order-section">
+        <h2><i class="fa-solid fa-truck-fast"></i> 2. Como deseja receber?</h2>
+
+        <label class="delivery-option">
+            <input type="radio" name="entrega"
+                   value="Entrega em casa" checked>
+            Entrega em casa
+        </label>
+
+        <label class="delivery-option">
+            <input type="radio" name="entrega"
+                   value="Retirar no local">
+            Retirar no local
+        </label>
+
+        <div id="address-area">
+            <label class="order-label" for="endereco">
+                Endereço de entrega *
+            </label>
+
+            <input class="order-input"
+                   type="text"
+                   id="endereco"
+                   placeholder="Rua, número e bairro">
+
+            <label class="order-label" for="referencia">
+                Complemento ou referência
+            </label>
+
+            <input class="order-input"
+                   type="text"
+                   id="referencia"
+                   placeholder="Ex.: casa dos portões pretos">
+        </div>
+    </section>
+
+    <!-- Dados do cliente -->
+    <section class="order-section">
+        <h2><i class="fa-solid fa-user"></i> 3. Seus dados</h2>
+
+        <label class="order-label" for="nome">Seu nome *</label>
+        <input class="order-input"
+               type="text"
+               id="nome"
+               placeholder="Digite seu nome">
+
+        <label class="order-label" for="observacoes">
+            Observações do pedido
+        </label>
+        <textarea class="order-textarea"
+                  id="observacoes"
+                  placeholder="Ex.: sem cebola, molho à parte..."></textarea>
+    </section>
+
+    <!-- Envio -->
+    <button class="btn whatsapp order-submit" id="send-order">
+        <i class="fa-brands fa-whatsapp"></i>
+        Enviar pedido pelo WhatsApp
+    </button>
+
+    <p class="order-note">
+        Seu pedido será enviado para confirmação pelo estabelecimento.
+    </p>
+
+    <div style="margin-top: 20px;">
+        <a href="index.html" class="btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Voltar ao início
+        </a>
+    </div>
+
+    <footer class="footer order-footer">
+        <p>Desenvolvido com tecnologia própria.</p>
+    </footer>
+
+</div>
+
+<script>
+    // TROQUE PELO WHATSAPP REAL DO ESTABELECIMENTO.
+    // Use o código do país + DDD + número, somente números.
+    const WHATSAPP_NUMBER = "5521999999999";
+
+    const checks = document.querySelectorAll(".product-check");
+    const totalElement = document.getElementById("total");
+    const addressArea = document.getElementById("address-area");
+    const addressInput = document.getElementById("endereco");
+    const sendButton = document.getElementById("send-order");
+
+    function formatMoney(value) {
+        return value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
+    function updateTotal() {
+        let total = 0;
+
+        checks.forEach(check => {
+            const quantityInput =
+                check.closest(".product").querySelector(".product-quantity");
+
+            quantityInput.disabled = !check.checked;
+
+            if (check.checked) {
+                const quantity = Math.max(
+                    1,
+                    Math.min(99, Number(quantityInput.value) || 1)
+                );
+
+                total += Number(check.dataset.price) * quantity;
+            }
+        });
+
+        totalElement.textContent = formatMoney(total);
+    }
+
+    checks.forEach(check => {
+        check.addEventListener("change", updateTotal);
+
+        check.closest(".product")
+            .querySelector(".product-quantity")
+            .addEventListener("input", updateTotal);
+    });
+
+    document.querySelectorAll('input[name="entrega"]').forEach(option => {
+        option.addEventListener("change", () => {
+            const delivery = document.querySelector(
+                'input[name="entrega"]:checked'
+            ).value === "Entrega em casa";
+
+            addressArea.hidden = !delivery;
+            addressInput.required = delivery;
+        });
+    });
+
+    sendButton.addEventListener("click", () => {
+        const nome = document.getElementById("nome").value.trim();
+        const observacoes =
+            document.getElementById("observacoes").value.trim();
+
+        const entrega = document.querySelector(
+            'input[name="entrega"]:checked'
+        ).value;
+
+        const endereco = addressInput.value.trim();
+        const referencia =
+            document.getElementById("referencia").value.trim();
+
+        const selecionados = [];
+        let total = 0;
+
+        checks.forEach(check => {
+            if (!check.checked) return;
+
+            const produto = check.dataset.name;
+            const preco = Number(check.dataset.price);
+
+            const quantidadeInput =
+                check.closest(".product").querySelector(".product-quantity");
+
+            const quantidade = Math.max(
+                1,
+                Math.min(99, Number(quantidadeInput.value) || 1)
+            );
+
+            const subtotal = preco * quantidade;
+            total += subtotal;
+
+            selecionados.push(
+                `${produto} x${quantidade} — ${formatMoney(subtotal)}`
+            );
+        });
+
+        if (!nome) {
+            alert("Por favor, informe seu nome.");
+            document.getElementById("nome").focus();
+            return;
+        }
+
+        if (selecionados.length === 0) {
+            alert("Selecione pelo menos um produto.");
+            return;
+        }
+
+        if (entrega === "Entrega em casa" && !endereco) {
+            alert("Informe o endereço para entrega.");
+            addressInput.focus();
+            return;
+        }
+
+        const mensagem = [
+            "Olá! Gostaria de fazer um pedido.",
+            "",
+            `Nome: ${nome}`,
+            "",
+            "PRODUTOS:",
+            ...selecionados,
+            "",
+            `Total dos produtos: ${formatMoney(total)}`,
+            `Forma de recebimento: ${entrega}`,
+            ...(entrega === "Entrega em casa"
+                ? [
+                    `Endereço: ${endereco}`,
+                    ...(referencia ? [`Referência: ${referencia}`] : [])
+                  ]
+                : []),
+            ...(observacoes
+                ? ["", `Observações: ${observacoes}`]
+                : []),
+            "",
+            "Por favor, confirme o pedido e o valor final."
+        ].join("\n");
+
+        const numero = WHATSAPP_NUMBER.replace(/\D/g, "");
+
+        if (!numero || numero === "5521999999999") {
+            alert(
+                "Esta é uma página de demonstração. " +
+                "Substitua o número de exemplo pelo WhatsApp do estabelecimento."
+            );
+            return;
+        }
+
+        const url = "https://wa.me/" + numero +
+            "?text=" + encodeURIComponent(mensagem);
+
+        window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    updateTotal();
+</script>
+
+</body>
+</html>
